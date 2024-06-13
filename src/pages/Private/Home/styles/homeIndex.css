@@ -1,0 +1,9 @@
+@media (width >= 640px) {
+  .search-home {
+    background-image: url("../../../../../public/tulipanes.webp");
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+  }
+}
