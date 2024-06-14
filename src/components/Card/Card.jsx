@@ -7,7 +7,7 @@ const Card = ({ id, name, price, image }) => {
   };
   return (
     <div
-      className="w-[40%] sm:w-[20%] flex-shrink-0 cursor-pointer flex flex-col h-44 sm:bg-red-100 justify-between"
+      className="w-[40%] sm:w-full flex-shrink-0 cursor-pointer flex flex-col h-auto justify-between"
       onClick={handleClick}
     >
       <div className="h-20 sm:min-h-44 overflow-hidden">

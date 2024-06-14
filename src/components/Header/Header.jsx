@@ -18,7 +18,7 @@ const Header = () => {
   };
 
   return (
-    <header className="header sm:px-0 sm:fixed sm:top-0 sm:h-14 sm:flex sm:w-full sm:justify-between sm:py-10 grid grid-cols-[1fr_2fr_1fr] items-center p-2 z-10">
+    <header className="header sm:px-32 sm:fixed sm:top-0 sm:h-14 sm:flex sm:w-full sm:justify-between sm:py-10 grid grid-cols-[1fr_2fr_1fr] items-center p-2 z-10">
       {/* CARRITO */}
       <section className="sm:h-14 cursor-pointer w-min">
         <Link

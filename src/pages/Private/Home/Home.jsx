@@ -53,7 +53,7 @@ function Home() {
   }, [search]);
 
   return (
-    <main className=" min-h-full w-full">
+    <main className=" min-h-full w-full ">
       {products ? (
         <>
           <Header
@@ -78,8 +78,8 @@ function Home() {
             />
           </section>
           {/* //SECCION PRODUCTOS */}
-          <section className="sm:rounded-none sm:h-full p-6 bg-slate-100 h-2/3 w-full rounded-t-[40px]">
-            <div className=" sm:min-h-screen sm:">
+          <section className="sm:px-32 sm:rounded-none p-6 bg-slate-100 h-2/3 w-full rounded-t-[40px]">
+            <div className="">
               <div className="flex flex-col sm:bg-slate-100">
                 <h3 className="font-bold text-xl text-myGreen sm:self-center sm:text-3xl sm:mb-6">
                   Categorías
@@ -91,8 +91,11 @@ function Home() {
               </div>
               {/* PRODUCTO EJEMPLO */}
               <div className="pt-4 pb-4 rounded-sm">
-                <div className="p-2 bg-slate-200 flex justify-around rounded-xl">
-                  <div className="flex flex-col justify-around w-1/2">
+                <div
+                  className="
+                sm:p-0 bg-slate-200 flex justify-around items-evenly rounded-xl sm:h-72 sm:min-h-min"
+                >
+                  <div className="flex flex-col justify-between w-1/2 sm:w-full sm:p-12 p-2">
                     {products != null && products ? (
                       <>
                         <p className="font-bold text-2xl">
@@ -103,7 +106,11 @@ function Home() {
                         </b>
                         <Link
                           to={`product/${products[0].ID_producto}`}
-                          className="text-myGreen font-bold text-lg mt-7 sm:mt-0"
+                          className="text-myGreen font-bold text-lg mt-7 sm:mt-0 hover:bg-myGreen hover:text-white
+                          sm:max-w-min
+                          sm:p-2
+                          sm:rounded-xl
+                          transition-all"
                         >
                           Comprar
                         </Link>
@@ -112,12 +119,12 @@ function Home() {
                       ""
                     )}
                   </div>
-                  <div className="w-1/2">
+                  <div className="w-1/2 overflow-hidden">
                     {products.length > 0 && products[0].imagen ? (
                       <img
                         src={products[0].imagen}
                         alt={products[0].nombre}
-                        className="object-cover rounded-xl h-full"
+                        className="object-cover h-full rounded-tr-xl rounded-br-xl hover:scale-125 transition-all"
                       />
                     ) : (
                       <p>Sin productos a mostrar.</p>
@@ -127,14 +134,14 @@ function Home() {
               </div>
             </div>
             {/* PRODUCTOS DESTACADOS */}
-            <aside className="dest-pro-cont w-full flex justify-between">
+            <aside className="dest-pro-cont w-full flex justify-between h-full">
               <p className="sm:text-3xl sm:text-myGreen sm:m-8 font-bold text-lg">
                 Productos destacados
               </p>
               <b className=" sm:hidden">Ver todo</b>
             </aside>
-            <div className="sm:overflow-x-hidden sm:flex-wrap sm:gap-14 flex overflow-x-scroll mt-3 gap-2 items-center">
-              <div className="flex sm:flex sm:flex-wrap sm:overflow-y-hidden">
+            <div className="sm:overflow-x-hidden sm:flex-wrap sm:gap-14 flex overflow-x-scroll mt-3 items-center">
+              <div className="flex sm:grid sm:grid-cols-4 sm:gap-3 gap-6 sm:min-h-full">
                 {filterProducts && filterProducts[0] != undefined ? (
                   filterProducts.map((pro) => {
                     return (
@@ -155,7 +162,7 @@ function Home() {
               </div>
             </div>
           </section>
-          <footer className="relative h-16 w-full bg-myGreen text-green-900 flex items-center justify-center font-bold text-center">
+          <footer className="sm:px-32 h-16 w-full bg-myGreen text-green-900 flex items-center justify-center font-bold text-center">
             App desarrollada por Jhoneiker apoyado de Santiago
           </footer>
         </>
