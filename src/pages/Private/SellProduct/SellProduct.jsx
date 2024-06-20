@@ -20,7 +20,7 @@ function SellProduct() {
   const [stock, setStock] = useState("");
   const [categoria, setCategoria] = useState("");
   const [categorias, setCategorias] = useState("");
-  const { user } = useAuth()
+  const { user } = useAuth();
 
   useEffect(() => {
     apiCategories.getCategories().then((res) => setCategorias(res));
@@ -39,66 +39,72 @@ function SellProduct() {
       user.nombre,
       user.email
     );
-    if(user.rol == 1) auth.updateRol(2, user.nombre, user.email);
+    if (user.rol == 1) auth.updateRol(2, user.nombre, user.email);
   };
 
   return (
-    <main>
+    <>
       <Header />
-      <form className=" flex flex-col gap-4 w-full p-6">
-        <h1 className="font-semibold text-3xl">Vender mi producto</h1>
-        <Input
-          type="text"
-          placeholder="Ingrese el nombre de su producto"
-          icon={faPortrait}
-          value={name}
-          setValue={setName}
-        />
-        <Input
-          type="text"
-          placeholder="Ingresa la descripcion de tu producto"
-          icon={faPortrait}
-          value={description}
-          setValue={setDescription}
-        />
-        <Input
-          type="text"
-          placeholder="Ingresa tu imagen, debe ser una url"
-          icon={faImage}
-          value={image}
-          setValue={setImage}
-        />
-        <Input
-          type="number"
-          placeholder="Precio de venta"
-          icon={faMoneyBill}
-          value={precio}
-          setValue={setPrecio}
-        />
-        <Input
-          type="number"
-          placeholder="Cantidades disponibles"
-          icon={faMoneyBill}
-          value={stock}
-          setValue={setStock}
-        />
-        <select
-          name="listaCategorias"
-          onChange={(e) => setCategoria(e.target.value)}
-        >
-          {categorias
-            ? categorias.map((cat) => {
-                return (
-                  <option value={cat.nombre} key={cat.ID_categoria}>
-                    {cat.nombre}
-                  </option>
-                );
-              })
-            : "cargando..."}
-        </select>
-        <Btn value="Publicar" onClick={handleClick} />
-      </form>
-    </main>
+      <main className="sm:mt-24 sm:p-10 sm:flex sm:flex-col sm:items-center">
+        <h1 className="font-bold text-3xl text-myGreen ml-4">
+          Vender mi producto
+        </h1>
+        <form className=" flex flex-col gap-4 w-full p-6 sm:grid sm:grid-cols-3 sm:grid-rows-3">
+          <Input
+            type="text"
+            placeholder="Ingrese el nombre de su producto"
+            icon={faPortrait}
+            value={name}
+            setValue={setName}
+          />
+          <Input
+            type="text"
+            placeholder="Ingresa la descripcion de tu producto"
+            icon={faPortrait}
+            value={description}
+            setValue={setDescription}
+          />
+          <Input
+            type="text"
+            placeholder="Ingresa tu imagen, debe ser una url"
+            icon={faImage}
+            value={image}
+            setValue={setImage}
+          />
+          <Input
+            type="number"
+            placeholder="Precio de venta"
+            icon={faMoneyBill}
+            value={precio}
+            setValue={setPrecio}
+          />
+          <Input
+            type="number"
+            placeholder="Cantidades disponibles"
+            icon={faMoneyBill}
+            value={stock}
+            setValue={setStock}
+          />
+          <select
+            name="listaCategorias"
+            onChange={(e) => setCategoria(e.target.value)}
+          >
+            {categorias
+              ? categorias.map((cat) => {
+                  return (
+                    <option value={cat.nombre} key={cat.ID_categoria}>
+                      {cat.nombre}
+                    </option>
+                  );
+                })
+              : "cargando..."}
+          </select>
+        </form>
+        <div className=" sm:w-1/3">
+          <Btn value="Publicar" onClick={handleClick} />
+        </div>
+      </main>
+    </>
   );
 }
 export default SellProduct;

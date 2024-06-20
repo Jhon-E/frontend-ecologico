@@ -18,17 +18,18 @@ export default function Pro_sales() {
   return (
     <>
       <Header />
-      {console.log(products)}
-      <main className=" p-6">
-        <h1 className="text-2xl font-bold mb-6">Mis productos en venta: </h1>
-        <section className="h-auto w-full bg-slate-200 p-2 rounded-lg flex flex-wrap gap-14">
+      <main className="sm:mt-24 sm:p-10 p-6">
+        <h1 className="text-2xl font-bold mb-6 text-myGreen">
+          Mis productos en venta{" "}
+        </h1>
+        <section className="w-full bg-slate-200 p-2 rounded-lg flex flex-wrap gap-14 sm:grid sm:grid-cols-3 sm:grap sm:gap-4">
           {products
             ? products.map((pro) => (
-                <div className="w-[40%] flex-shrink-0 cursor-pointer flex flex-col h-44 justify-between">
-                  <div className="h-20 overflow-hidden">
+                <div className="w-[40%] sm:w-full cursor-pointer flex flex-col justify-between sm:h-[300px]">
+                  <div className="h-20 sm:h-min overflow-hidden">
                     <img
                       src={pro.imagen ?? "/ejemplo.png"}
-                      className="transition-all hover:scale-125 rounded-xl h-full w-full object-cover"
+                      className="transition-all hover:scale-125 rounded-xl h-full w-full object-cover sm:h-full"
                     />
                   </div>
                   <div className=" flex-grow">

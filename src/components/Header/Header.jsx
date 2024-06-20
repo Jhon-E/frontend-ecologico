@@ -30,7 +30,7 @@ const Header = () => {
             className="cursor-pointer h-[30px] text-myGreen -left-5 -top-5 z-10 sm:ml-8"
           />
           {cart.length > 0 ? (
-            <span className=" sm:top-8 sm:left-14 bg-red-600 text-white font-bold text-xs h-[20px] w-[20px] flex justify-center absolute top-11 left-8 items-center rounded-full z-30">
+            <span className=" sm:top-10 sm:left-[180px] bg-red-600 text-white font-bold text-xs h-[20px] w-[20px] flex justify-center absolute top-11 left-8 items-center rounded-full z-30">
               {cart.length}
             </span>
           ) : null}
@@ -48,7 +48,7 @@ const Header = () => {
       </div>
       {/* ICONO PERFIL DE USUARIO */}
       <div
-        className="sm:h-14 rounded-full w-16 h-16 bg-slate-200 justify-self-end overflow-hidden cursor-pointer z-20"
+        className="sm:h-14 rounded-full w-16 h-16 bg-slate-200 justify-self-end overflow-hidden cursor-pointer z-10"
         onClick={handleClick}
       >
         <img

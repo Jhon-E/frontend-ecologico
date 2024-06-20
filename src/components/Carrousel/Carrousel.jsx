@@ -56,7 +56,7 @@ const Carrousel = ({ title, images, des, infoSeller }) => {
   };
   return (
     <>
-      <ul className="flex gap-7 overflow-x-scroll items-end justify-evenly">
+      <ul className="flex gap-7 overflow-x-scroll items-end justify-evenly sm:overflow-x-hidden">
         <li
           className={`cursor-pointer min-w-max text-black h-min border-b-4 p-1 ${
             resumen ? "border-myGreen" : "border-none"

@@ -16,8 +16,8 @@ function CartItem({
   stock,
 }) {
   return (
-    <li className="w-full flex flex-col items-start gap-8 p-6">
-      <img className="w-2/3 h-1/3 self-center" src={imagen} alt={nombre} />
+    <li className="w-full flex flex-col items-start gap-8 p-6 sm:w-2/5 sm:h-96">
+      <img className="w-2/3 h-1/3 self-center object-contain" src={imagen} alt={nombre} />
       <div className="flex flex-col justify-start">
         <strong>
           {nombre} - ${precio * quantity}
@@ -59,7 +59,9 @@ export default function Cart() {
     const pedido = [...cart, user.email];
     orderApi.submitOrder(pedido).then((res) => {
       if (res.status === 200) {
-        navigate(`/${PRIVATE_ROUTES.PRIVATE}/${PRIVATE_ROUTES.HOME}/${PRIVATE_ROUTES.ORDER_PAGE}/`);
+        navigate(
+          `/${PRIVATE_ROUTES.PRIVATE}/${PRIVATE_ROUTES.HOME}/${PRIVATE_ROUTES.ORDER_PAGE}/`
+        );
       }
     });
   };
@@ -67,7 +69,7 @@ export default function Cart() {
     <main className="flex flex-col min-h-screen">
       <Header />
       <ul
-        className={`flex justify-center items-center ${
+        className={`flex justify-center items-center sm:flex-row sm:justify-around sm:flex-wrap sm:mt-16 ${
           cart.length === 0 ? "flex-1" : "flex-col gap-y-4"
         }`}
       >

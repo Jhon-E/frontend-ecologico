@@ -62,7 +62,7 @@ function Home() {
           />
           {/* SECCION BUSCADOR */}
           <section className="sm:p-32 search-home sm:h-screen sm:justify-center sm:gap-24 sm:max-w flex flex-col gap-6 p-6 h-1/3">
-            <article className=" sm:text-green-900 rounded-md">
+            <article className=" sm:text-white rounded-md">
               <p className=" font-bold">
                 Hola{" "}
                 <code>{user && user.nombre ? user.nombre : "usuario"}</code>
@@ -79,58 +79,52 @@ function Home() {
           </section>
           {/* //SECCION PRODUCTOS */}
           <section className="sm:px-32 sm:rounded-none p-6 bg-slate-100 h-2/3 w-full rounded-t-[40px]">
-            <div className="">
-              <div className="flex flex-col sm:bg-slate-100">
-                <h3 className="font-bold text-xl text-myGreen sm:self-center sm:text-3xl sm:mb-6">
-                  Categorías
-                </h3>
-                {/* LISTA DE CATEGORIAS */}
-                <aside className="w-full">
-                  <ListOfCategories onClick={handleClick} />
-                </aside>
-              </div>
-              {/* PRODUCTO EJEMPLO */}
-              <div className="pt-4 pb-4 rounded-sm">
-                <div
-                  className="
-                sm:p-0 bg-slate-200 flex justify-around items-evenly rounded-xl sm:h-72 sm:min-h-min"
-                >
-                  <div className="flex flex-col justify-between w-1/2 sm:w-full sm:p-12 p-2">
-                    {products != null && products ? (
-                      <>
-                        <p className="font-bold text-2xl">
-                          {products[0].nombre}
-                        </p>
-                        <b className="text-myGreen text-3xl">
-                          {products[0].precio} $
-                        </b>
-                        <Link
-                          to={`product/${products[0].ID_producto}`}
-                          className="text-myGreen font-bold text-lg mt-7 sm:mt-0 hover:bg-myGreen hover:text-white
+            <div className="flex flex-col sm:bg-slate-100">
+              <h3 className="font-bold text-xl text-myGreen sm:self-center sm:text-3xl sm:mb-6">
+                Categorías
+              </h3>
+              {/* LISTA DE CATEGORIAS */}
+              <aside className="w-full">
+                <ListOfCategories onClick={handleClick} />
+              </aside>
+            </div>
+            {/* PRODUCTO EJEMPLO */}
+            <div
+              className="
+                sm:p-0 bg-slate-200 flex justify-between items-evenly rounded-xl sm:h-72 sm:min-h-min mt-4 mb-4"
+            >
+              <div className="flex flex-col justify-between w-1/2 sm:w-full sm:p-12 p-2">
+                {products != null && products ? (
+                  <>
+                    <p className="font-bold text-2xl">{products[0].nombre}</p>
+                    <b className="text-myGreen text-3xl">
+                      {products[0].precio} $
+                    </b>
+                    <Link
+                      to={`product/${products[0].ID_producto}`}
+                      className="text-myGreen font-bold text-lg mt-7 sm:mt-0 hover:bg-myGreen hover:text-white
                           sm:max-w-min
                           sm:p-2
                           sm:rounded-xl
                           transition-all"
-                        >
-                          Comprar
-                        </Link>
-                      </>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                  <div className="w-1/2 overflow-hidden">
-                    {products.length > 0 && products[0].imagen ? (
-                      <img
-                        src={products[0].imagen}
-                        alt={products[0].nombre}
-                        className="object-cover h-full rounded-tr-xl rounded-br-xl hover:scale-125 transition-all"
-                      />
-                    ) : (
-                      <p>Sin productos a mostrar.</p>
-                    )}
-                  </div>
-                </div>
+                    >
+                      Comprar
+                    </Link>
+                  </>
+                ) : (
+                  ""
+                )}
+              </div>
+              <div className="w-1/2 flex justify-end overflow-hidden">
+                {products.length > 0 && products[0].imagen ? (
+                  <img
+                    src={products[0].imagen}
+                    alt={products[0].nombre}
+                    className="object-cover h-full rounded-tr-xl rounded-br-xl hover:scale-125 transition-all self-end"
+                  />
+                ) : (
+                  <p>Sin productos a mostrar.</p>
+                )}
               </div>
             </div>
             {/* PRODUCTOS DESTACADOS */}

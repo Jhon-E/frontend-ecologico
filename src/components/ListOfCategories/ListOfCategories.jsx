@@ -14,7 +14,7 @@ const ListOfCategories = ({ onClick }) => {
             return (
               <li
                 key={c.ID_categoria}
-                className=" cursor-pointer bg-myGreen p-2 min-w-max text-white rounded-3xl h-min"
+                className=" cursor-pointer bg-myGreen p-2 min-w-max text-white rounded-3xl transition-all h-min hover:scale-110"
                 onClick={() => onClick(c.nombre)}
               >
                 {c.nombre}

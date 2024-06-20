@@ -26,7 +26,7 @@ export default function Order() {
   return (
     <>
       <Header />
-      <main className="p-6 w-full h-max flex flex-col gap-10 bg-slate-100">
+      <main className="p-6 w-full h-max flex flex-col gap-10 bg-slate-100 sm:mt-16">
         <h1 className=" font-bold text-2xl mb-8">Detalles del pedido</h1>
         <section className="h-[20%] text-xl flex flex-col gap-4">
           <div className=" flex justify-between">
