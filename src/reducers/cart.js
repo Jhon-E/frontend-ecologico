@@ -14,7 +14,6 @@ export const cartReducer = (state, action) => {
       const productInCartIndex = state.findIndex(
         (item) => item.ID_producto === ID_producto
       );
-      console.log({ productInCartIndex });
       if (productInCartIndex >= 0) {
         const newCart = structuredClone(state);
         newCart[productInCartIndex].quantity += 1;

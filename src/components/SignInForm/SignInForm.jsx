@@ -18,7 +18,7 @@ export default function SignInForm() {
       login(email, pass);
       setEmail("");
       setPass("");
-      navigate(PRIVATE_ROUTES.PRIVATE, { replace: true });
+      //navigate(PRIVATE_ROUTES.PRIVATE, { replace: true });
     } else {
       alert("Por favor rellene los campos");
     }

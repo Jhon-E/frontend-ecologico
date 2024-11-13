@@ -33,34 +33,41 @@ const Product = () => {
     <>
       <header className="flex justify-between p-8 overflow-x-hidden">
         <div onClick={() => navigate(-1)}>
-          <FontAwesomeIcon icon={faArrowLeft} size="2x" className=" cursor-pointer"/>
+          <FontAwesomeIcon
+            icon={faArrowLeft}
+            size="2x"
+            className=" cursor-pointer"
+          />
         </div>
       </header>
-      <section className=" p-6 sm:p-10 ">
+      <section className=" p-6 ">
         <b className=" text-2xl text-myGreen">{product.precio} COP</b>
         <h1 className=" text-4xl font-bold">{product.nombre}</h1>
       </section>
-      <main className="bg-white sm:grid sm:grid-cols-2 sm:h-full">
+      <main className="bg-white sm:grid sm:grid-cols-2 sm:h-dvh">
         {/* ACA VA EL CARROUSEL */}
-        <section className="h-2/4 sm:h-full w-full" suppressHydrationWarning={true}>
+        <section
+          className="h-2/4 sm:h-full w-full"
+          suppressHydrationWarning={true}
+        >
           <Carrousel
             title={product.nombre}
             images={product.imagen}
             des={product.descripcion}
             infoSeller={seller}
           />
+          <Footer
+            isProductInCart={checkProductInCart(product)}
+            onClick={() => {
+              checkProductInCart(product)
+                ? removeFromCart(product)
+                : addToCart(product);
+            }}
+          />
         </section>
         {/* CAJA DE COMENTARIOS*/}
         <BoxComments productId={productId} />
       </main>
-      <Footer
-        isProductInCart={checkProductInCart(product)}
-        onClick={() => {
-          checkProductInCart(product)
-            ? removeFromCart(product)
-            : addToCart(product);
-        }}
-      />
     </>
   );
 };

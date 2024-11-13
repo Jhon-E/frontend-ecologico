@@ -17,11 +17,12 @@ class ApiComents {
     return response;
   }
 
-  async submitComment(token, id_producto, contenido) {
+  async submitComment(token, id_producto, contenido, date) {
     const data = {
       token,
       id_producto,
       contenido,
+      date
     };
     const response = await fetch(`${this.baseUrl}/comments`, {
       method: "POST",

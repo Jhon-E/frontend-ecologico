@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../contexts/auth";
 import auth from "../services/ApiAuth";
 const defaultAvatar =
-  "https://img.freepik.com/vector-premium/personaje-avatar-moda-icono-hombres-ilustracion-vector-plano-gente-alegre-feliz-marco-redondo-retratos-masculinos-grupo-equipo-adorables-chicos-aislados-sobre-fondo-blanco_275421-286.jpg?w=1380";
+  "https://emojiisland.com/cdn/shop/products/Flushed_Emoji_Icon_5e6ce936-4add-472b-96ba-9082998adcf7_large.png?v=1571606089";
 
 export default function useAuth() {
   const { token, setToken, user, setUser } = useContext(AuthContext);
@@ -18,9 +18,11 @@ export default function useAuth() {
         })
         .then((res) => res);
       if (response.status === 409) {
-        alert("Este usuario ya se encuentra registrado.");
+        const res = await response.json()
+        alert(res.message);
       } else {
         const res = await response.json();
+        console.log("epalee", res);
         localStorage.setItem("token", `${res.accestToken}`);
         localStorage.setItem(
           "user",
@@ -31,7 +33,7 @@ export default function useAuth() {
             rol: 1,
           })
         );
-        setToken(`${res.accestToken}`);
+        setToken(res.accestToken);
         setUser({
           nombre,
           email,
@@ -50,28 +52,31 @@ export default function useAuth() {
         .loginService({ email, password })
         .then((res) => res);
 
-      if (response.status === 404) {
-        alert("El usuario no existe, verifique sus credenciales.");
+      if (response.status === 409) {
+        const res = await response.json()
+        
+        alert(res.message);
       } else {
         const res = await response.json();
         console.log(res);
-        localStorage.setItem("token", `${res.accest_token}`);
+        localStorage.setItem("token", `${res.token}`);
         localStorage.setItem(
           "user",
           JSON.stringify({
-            nombre: res.nombre,
+            nombre: res.user.nombre,
             email,
-            avatar: res.avatar || defaultAvatar,
-            rol: res.rol
+            avatar: res.user.avatar || defaultAvatar,
+            rol: res.user.rol,
           })
         );
-        setToken(`${res.accest_token}`);
+        setToken(res.token);
         setUser({
-          nombre: res.nombre,
+          nombre: res.user.nombre,
           email,
-          avatar: res.avatar || defaultAvatar,
-          rol: res.rol
+          avatar: res.user.avatar || defaultAvatar,
+          rol: res.user.rol,
         });
+        window.location.replace("http://localhost:5173/mainsystem/home");
       }
     } catch (err) {
       console.error(err);

@@ -62,8 +62,8 @@ class ApiAuth {
   }
 
   async updateRol(rol, nombre, email) {
-    const res = await fetch(`${this.baseUrl}/auth/rol`, {
-      method: "POST",
+    const res = await fetch(`${this.baseUrl}/users/rol`, {
+      method: "PUT",
       headers: {
         "Content-type": "application/json",
       },

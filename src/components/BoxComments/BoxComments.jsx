@@ -20,13 +20,14 @@ const BoxComments = ({ productId }) => {
 
     try {
       const responseSubmit = await apiComentarios
-        .submitComment(token, parseInt(productId), comentario)
+        .submitComment(token, parseInt(productId), comentario, new Date().getTime())
         .then((res) => res);
-      if (responseSubmit.status === 201) {
+      if (responseSubmit.ok) {
         setComentario("");
         const responseGet = await apiComentarios
           .getCommentsByProduct(productId)
           .then((res) => res.json());
+
         setComments(responseGet);
       } else {
         console.log(responseSubmit);
@@ -39,9 +40,11 @@ const BoxComments = ({ productId }) => {
   return (
     <section className="p-6 h-auto z-40">
       <h1 className=" text-xl font-semibold mb-4">
+        {console.log(comments)
+        }
         Comentarios ({comments.length})
       </h1>
-      <div className="w-full m-0 p-0 pb-4 h-60 flex flex-col gap-4 overflow-y-scroll scroll-smooth mb-2">
+      <div className="w-full sm:h-auto sm:-z-10 sm:overflow-hidden m-0 p-0 pb-4 h-60 flex flex-col gap-4 overflow-y-scroll scroll-smooth mb-2">
         {comments.length > 0 && comments ? (
           comments.map((comment, index) => (
             <aside
@@ -54,7 +57,7 @@ const BoxComments = ({ productId }) => {
                     src={
                       comment.avatar
                         ? comment.avatar
-                        : "https://img.freepik.com/vector-premium/personaje-avatar-moda-icono-hombres-ilustracion-vector-plano-gente-alegre-feliz-marco-redondo-retratos-masculinos-grupo-equipo-adorables-chicos-aislados-sobre-fondo-blanco_275421-286.jpg?w=1380"
+                        : "https://emojiisland.com/cdn/shop/products/Flushed_Emoji_Icon_5e6ce936-4add-472b-96ba-9082998adcf7_large.png?v=1571606089"
                     }
                     className="h-full w-full object-cover rounded-full"
                   />
@@ -71,9 +74,7 @@ const BoxComments = ({ productId }) => {
                     return fecha.toLocaleDateString("es-ES", {
                       year: "numeric",
                       month: "short",
-                      day: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
+                      day: "numeric"
                     });
                   })()}
                 </small>

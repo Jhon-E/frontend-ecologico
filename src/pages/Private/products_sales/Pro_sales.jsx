@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import Header from "../../../components/Header";
 import apiProducts from "../../../services/apiProducts";
 import useAuth from "../../../hooks/useAuth";
-import Card from "../../../components/Card";
-
 export default function Pro_sales() {
   const { user } = useAuth();
 

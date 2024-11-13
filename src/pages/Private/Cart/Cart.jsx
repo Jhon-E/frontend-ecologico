@@ -52,13 +52,14 @@ function CartItem({
 
 export default function Cart() {
   const { cart, clearCart, addToCart, removeFromCart } = useCart();
-  const { user } = useAuth();
+  const { token } = useAuth();
   const navigate = useNavigate();
 
   const handleClick = (cart) => {
-    const pedido = [...cart, user.email];
+    const pedido = [...cart, {token}];
+
     orderApi.submitOrder(pedido).then((res) => {
-      if (res.status === 200) {
+      if (res.status === 201) {
         navigate(
           `/${PRIVATE_ROUTES.PRIVATE}/${PRIVATE_ROUTES.HOME}/${PRIVATE_ROUTES.ORDER_PAGE}/`
         );

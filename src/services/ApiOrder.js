@@ -19,8 +19,8 @@ class ApiOrder {
     return await res;
   }
 
-  async getOrder(nombre, email) {
-    const res = await fetch(`${this.baseUrl}/order?nombre=${nombre}&email=${email}`, {
+  async getOrder(token) {
+    const res = await fetch(`${this.baseUrl}/order?token=${token}`, {
       headers: {
         "Content-type": "application/json",
       }

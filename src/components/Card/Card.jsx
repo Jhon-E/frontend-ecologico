@@ -7,12 +7,13 @@ const Card = ({ id, name, price, image }) => {
   };
   return (
     <div
-      className="w-[40%] sm:w-full flex-shrink-0 cursor-pointer flex flex-col h-auto justify-between"
+      className="w-full flex flex-col h-auto sm:w-full sm:cursor-pointer"
       onClick={handleClick}
     >
-      <div className="h-20 sm:min-h-44 overflow-hidden">
+      <div className="h-28 sm:min-h-44 overflow-hidden">
         <img
           src={image ?? "/ejemplo.png"}
+          alt={name}
           className="transition-all hover:scale-125 rounded-xl sm:h-64 h-full w-full object-cover"
         />
       </div>

@@ -26,28 +26,28 @@ const Carrousel = ({ title, images, des, infoSeller }) => {
   };
   const RenderDes = () => {
     return (
-      <div>
-        <section className="flex justify-center items-center text-myGreen border-b-2 p-4">
+      <div className=" sm:flex sm:flex-col sm:w-full">
+        <section className="flex justify-center items-center text-myGreen border-b-2 p-4 sm:justify-center">
           <h1 className=" font-bold text-3xl mb-7">CERTIFICADO 🌟</h1>
         </section>
         <section className=" border-b-2 p-4">
           <h1 className=" font-bold text-2xl mb-7">Descripción</h1>
           <p>{des}</p>
         </section>
-        <section className=" border-b-2 p-4">
+        <section className=" bordesm:ml-0 r-b-2 p-4">
           <h1 className=" font-bold text-2xl mb-7">Información del vendedor</h1>
-          <ul>
+          <ul className=" sm:grid sm:grid-cols-2 sm:text-center sm:gap-3">
             <li className="text-myGreen mb-3">
-              <h1 className=" text-2xl font-bold">Vendedor</h1>
-              <p className="ml-8 text-xl">{infoSeller.nombre}</p>
+              <h1 className=" text-2xl font-bold">Nombre del vendedor</h1>
+              <p className="sm:ml-0 ml-8 text-xl">{infoSeller.nombre}</p>
             </li>
             <li className=" text-myGreen mb-3">
               <h1 className=" text-2xl font-bold">Reputación</h1>
-              <p className="ml-8 text-xl">{infoSeller.reputacion}🌱</p>
+              <p className="sm:ml-0 ml-8 text-xl">{infoSeller.reputacion == 0?"Sin registros":infoSeller.reputacion}</p>
             </li>
             <li className="text-myGreen">
-              <h1 className=" text-2xl font-bold">Ventas realizadas</h1>
-              <p className="ml-8 text-xl">{infoSeller.ventasRealizadas}🌻</p>
+              <h1 className=" text-2xl font-bold">Ventas</h1>
+              <p className="sm:ml-0 ml-8 text-xl">{infoSeller.ventasRealizadas}</p>
             </li>
           </ul>
         </section>

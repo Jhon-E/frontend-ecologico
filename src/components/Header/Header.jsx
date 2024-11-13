@@ -18,9 +18,9 @@ const Header = () => {
   };
 
   return (
-    <header className="header sm:px-32 sm:fixed sm:top-0 sm:h-14 sm:flex sm:w-full sm:justify-between sm:py-10 grid grid-cols-[1fr_2fr_1fr] items-center p-2 z-10">
+    <header className="header sm:fixed sm:top-0 sm:h-8 sm:flex sm:w-full sm:justify-between sm:py-10 grid grid-cols-[1fr_2fr_1fr] items-center p-2 z-10">
       {/* CARRITO */}
-      <section className="sm:h-14 cursor-pointer w-min">
+      <section className="cursor-pointer w-min">
         <Link
           to={`/${PRIVATE_ROUTES.PRIVATE}/${PRIVATE_ROUTES.HOME}/${PRIVATE_ROUTES.CART}/`}
           className="flex items-center justify-center h-full w-full"
@@ -37,23 +37,22 @@ const Header = () => {
         </Link>
       </section>
       {/* LOGO */}
-      <div className=" sm:justify-center sm:h-14 flex items-center sm:drop-shadow">
+      <div className=" sm:justify-center flex items-center sm:drop-shadow">
         <Link to={`/${PRIVATE_ROUTES.PRIVATE}/${PRIVATE_ROUTES.HOME}/`}>
           <img
             src={LogoLetrasEcoLogico}
             alt="E-cologico"
-            className=" sm:w-52"
+            className=" sm:w-52 sm:object-cover sm:h-full"
           />
         </Link>
       </div>
       {/* ICONO PERFIL DE USUARIO */}
-      <div
-        className="sm:h-14 rounded-full w-16 h-16 bg-slate-200 justify-self-end overflow-hidden cursor-pointer z-10"
+      <div className="rounded-full justify-self-end w-16 sm:h-auto h-16 border-4 border-green-500 overflow-hidden cursor-pointer z-10"
         onClick={handleClick}
       >
         <img
           src={user.avatar}
-          className="h-full w-full object-cover rounded-full"
+          className="h-full w-full object-cover"
         />
       </div>
       {/* CONTAINER PERFIL */}

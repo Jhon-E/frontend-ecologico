@@ -27,7 +27,6 @@ function SellProduct() {
   }, []);
 
   const handleClick = (e) => {
-    console.log(user.nombre, user.email);
     e.preventDefault();
     apiProducts.submitProduct(
       name,
@@ -39,7 +38,8 @@ function SellProduct() {
       user.nombre,
       user.email
     );
-    if (user.rol == 1) auth.updateRol(2, user.nombre, user.email);
+    //ACTUALIZO EL ROL DEL USUARIO
+    if (user.rol == 1 && user.rol !== 2) auth.updateRol(2, user.nombre, user.email);
   };
 
   return (
