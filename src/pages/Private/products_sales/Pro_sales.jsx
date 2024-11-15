@@ -22,8 +22,8 @@ export default function Pro_sales() {
         </h1>
         <section className="w-full bg-slate-200 p-2 rounded-lg flex flex-wrap gap-14 sm:grid sm:grid-cols-3 sm:grap sm:gap-4">
           {products
-            ? products.map((pro) => (
-                <div className="w-[40%] sm:w-full cursor-pointer flex flex-col justify-between sm:h-[300px]">
+            ? products.map((pro, i) => (
+                <div key={i} className="w-[40%] sm:w-full cursor-pointer flex flex-col justify-between sm:h-[300px]">
                   <div className="h-20 sm:h-min overflow-hidden">
                     <img
                       src={pro.imagen ?? "/ejemplo.png"}

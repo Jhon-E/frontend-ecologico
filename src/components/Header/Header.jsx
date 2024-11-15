@@ -27,7 +27,7 @@ const Header = () => {
         >
           <FontAwesomeIcon
             icon={faCartShopping}
-            className="cursor-pointer h-[30px] text-myGreen -left-5 -top-5 z-10 sm:ml-8"
+            className="ic cursor-pointer h-[30px] text-myGreen -left-5 -top-5 z-10 sm:ml-8"
           />
           {cart.length > 0 ? (
             <span className=" sm:top-10 sm:left-[180px] bg-red-600 text-white font-bold text-xs h-[20px] w-[20px] flex justify-center absolute top-11 left-8 items-center rounded-full z-30">
@@ -42,12 +42,12 @@ const Header = () => {
           <img
             src={LogoLetrasEcoLogico}
             alt="E-cologico"
-            className=" sm:w-52 sm:object-cover sm:h-full"
+            className="ic sm:w-52 sm:object-cover sm:h-full"
           />
         </Link>
       </div>
       {/* ICONO PERFIL DE USUARIO */}
-      <div className="rounded-full justify-self-end w-16 sm:h-auto h-16 border-4 border-green-500 overflow-hidden cursor-pointer z-10"
+      <div className="rounded-full justify-self-end w-16 sm:h-auto h-16 border-2 sm:border-white border-myGreen overflow-hidden cursor-pointer z-10"
         onClick={handleClick}
       >
         <img
