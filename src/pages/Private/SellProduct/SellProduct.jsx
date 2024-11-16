@@ -3,9 +3,10 @@ import {
   faImage,
   faMoneyBill,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from "../../../components/Header";
 import Input from "../../../components/Input";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Btn from "../../../components/Button/Btn";
 import apiCategories from "../../../services/ApiCategories";
 import apiProducts from "../../../services/apiProducts";
@@ -15,31 +16,55 @@ import useAuth from "../../../hooks/useAuth";
 function SellProduct() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState("");
   const [precio, setPrecio] = useState("");
   const [stock, setStock] = useState("");
   const [categoria, setCategoria] = useState("");
+  const [blockBtn, setBlockBtn] = useState(false);
   const [categorias, setCategorias] = useState("");
   const { user } = useAuth();
+  const fileElem = useRef();
 
   useEffect(() => {
     apiCategories.getCategories().then((res) => setCategorias(res));
   }, []);
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
+    setBlockBtn(true);
+
+    //ACTUALIZO EL ROL DEL USUARIO
+    if (user.rol == 1 && user.rol !== 2)
+      auth.updateRol(2, user.nombre, user.email);
+
+    let avatar = fileElem.current.files[0];
+
+    const data = new FormData();
+
+    data.append("file", avatar);
+    data.append("upload_preset", "preset_eco");
+
+    const url_res = await fetch(
+      "https://api.cloudinary.com/v1_1/deipntdhp/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    //aca obtengo la respuesta de cloudinary
+    const imagen = await url_res.json();
+
     apiProducts.submitProduct(
       name,
       precio,
       stock,
       categoria,
       description,
-      image,
+      imagen.secure_url,
       user.nombre,
       user.email
     );
-    //ACTUALIZO EL ROL DEL USUARIO
-    if (user.rol == 1 && user.rol !== 2) auth.updateRol(2, user.nombre, user.email);
+    setBlockBtn(false)
   };
 
   return (
@@ -64,13 +89,24 @@ function SellProduct() {
             value={description}
             setValue={setDescription}
           />
-          <Input
-            type="text"
-            placeholder="Ingresa tu imagen, debe ser una url"
-            icon={faImage}
-            value={image}
-            setValue={setImage}
-          />
+          <div className="flex flex-row gap-1 bg-white/80 rounded-md items-center p-2 text-black border-gray-500 border-[1px]">
+            {faImage ? (
+              <FontAwesomeIcon
+                icon={faImage}
+                height={26}
+                width={24}
+                color="gray"
+              />
+            ) : (
+              ""
+            )}
+            <input
+              accept="image/"
+              className="w-full ml-1 py-2 bg-transparent outline-none"
+              type="file"
+              ref={fileElem}
+            />
+          </div>
           <Input
             type="number"
             placeholder="Precio de venta"
@@ -101,7 +137,7 @@ function SellProduct() {
           </select>
         </form>
         <div className=" sm:w-1/3">
-          <Btn value="Publicar" onClick={handleClick} />
+          <Btn value="Publicar" isDisable={blockBtn} onClick={handleClick} />
         </div>
       </main>
     </>
