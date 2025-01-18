@@ -8,4 +8,3 @@ Desarrollo de un Ecommerce de productos sustentables con el medio ambiente, aún
 ## Authors
 
 - [@Jhon-E](https://www.github.com/Jhon-E)
-- [@Santyzz0311](https://www.github.com/Santyzz0311)
