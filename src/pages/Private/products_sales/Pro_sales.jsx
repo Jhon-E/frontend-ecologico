@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "../../../components/Header";
 import apiProducts from "../../../services/apiProducts";
 import useAuth from "../../../hooks/useAuth";
+import Card from "../../../components/Card";
 export default function Pro_sales() {
   const { user } = useAuth();
 
@@ -16,25 +17,20 @@ export default function Pro_sales() {
   return (
     <>
       <Header />
-      <main className="sm:mt-24 sm:p-10 p-6">
-        <h1 className="text-2xl font-bold mb-6 text-myGreen">
-          Mis productos en venta{" "}
+      <main className="sm:mt-24 sm:px-32 px-6 py-24 w-dvw max-w-full">
+        <h1 className="text-4xl font-bold text-neutral mb-6">
+          Mis productos en venta
         </h1>
-        <section className="w-full bg-slate-200 p-2 rounded-lg flex flex-wrap gap-14 sm:grid sm:grid-cols-3 sm:grap sm:gap-4">
+        <section className="w-full rounded-lg flex flex-wrap gap-14 sm:grid sm:grid-cols-3 sm:grap sm:gap-4">
           {products
             ? products.map((pro, i) => (
-                <div key={i} className="w-[40%] sm:w-full cursor-pointer flex flex-col justify-between sm:h-[300px]">
-                  <div className="h-20 sm:h-min overflow-hidden">
-                    <img
-                      src={pro.imagen ?? "/ejemplo.png"}
-                      className="transition-all hover:scale-125 rounded-xl h-full w-full object-cover sm:h-full"
-                    />
-                  </div>
-                  <div className=" flex-grow">
-                    <p>{pro.nombre}</p>
-                    <b>{pro.precio} $</b>
-                  </div>
-                </div>
+                <Card
+                  key={pro.ID_producto}
+                  id={pro.ID_producto}
+                  name={pro.nombre}
+                  price={pro.precio}
+                  image={pro.imagen}
+                />
               ))
             : null}
         </section>
@@ -42,3 +38,15 @@ export default function Pro_sales() {
     </>
   );
 }
+
+/* {products
+            ? products.map((pro, i) => (
+              <Card
+              key={pro.ID_producto}
+              id={pro.ID_producto}
+              name={pro.nombre}
+              price={pro.precio}
+              image={pro.imagen}
+            />
+              ))
+            : null} */

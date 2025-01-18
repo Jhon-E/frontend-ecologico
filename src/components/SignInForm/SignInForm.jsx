@@ -9,16 +9,14 @@ import { PRIVATE_ROUTES } from "../../utils/routes";
 export default function SignInForm() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, loading } = useAuth();
 
   const handleSignIn = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (email !== "" && pass !== "") {
       login(email, pass);
       setEmail("");
       setPass("");
-      //navigate(PRIVATE_ROUTES.PRIVATE, { replace: true });
     } else {
       alert("Por favor rellene los campos");
     }
@@ -40,16 +38,13 @@ export default function SignInForm() {
         value={pass}
         setValue={setPass}
       />
-      <Btn
-        value="Iniciar sesión"
-        
-      />
+      <Btn value="Iniciar sesión" isDisable={loading} />
       <article className=" self-center">
         <p>
           ¿No tienes cuenta?{" "}
           <Link
             to="/register"
-            className="font-semibold self-center mb-4 text-myGreen"
+            className="font-semibold self-center mb-4 text-accent"
           >
             Inscribete aquí.
           </Link>

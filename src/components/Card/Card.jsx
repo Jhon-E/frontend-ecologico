@@ -7,19 +7,21 @@ const Card = ({ id, name, price, image }) => {
   };
   return (
     <div
-      className="w-full flex flex-col h-auto sm:w-full sm:cursor-pointer"
+      className="card bg-base-100 h-96 w-full flex-shrink-0 shadow-xl sm:w-full sm:cursor-pointer"
       onClick={handleClick}
     >
-      <div className="h-28 sm:min-h-44 overflow-hidden">
+      <figure>
         <img
           src={image ?? "/ejemplo.png"}
           alt={name}
           className="transition-all hover:scale-125 rounded-xl sm:h-64 h-full w-full object-cover"
         />
-      </div>
-      <div className=" flex-grow">
-        <p>{name}</p>
-        <b>{price} $</b>
+      </figure>
+      <div className="card-body">
+        <h2 className="card-title">{name}</h2>
+        <div className="card-actions justify-end">
+          <button className="btn btn-accent">{price}</button>
+        </div>
       </div>
     </div>
   );

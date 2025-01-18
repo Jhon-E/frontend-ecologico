@@ -8,13 +8,13 @@ const ListOfCategories = ({ onClick }) => {
   }, []);
 
   return (
-    <ul className="flex gap-7 sm:overflow-x-hidden sm:flex-wrap sm:justify-around overflow-x-scroll p-4">
+    <ul className="flex w-screen sm:w-max overflow-auto sm:flex-col gap-7 sm:overflow-x-hidden sm:flex-wrap sm:justify-around p-4">
       {categories
         ? categories.map((c) => {
             return (
               <li
                 key={c.ID_categoria}
-                className=" cursor-pointer bg-myGreen p-2 min-w-max text-white rounded-3xl transition-all h-min hover:scale-110"
+                className="text-center cursor-pointer bg-accent p-2 min-w-max text-base-100 rounded-3xl transition-all h-min hover:scale-110"
                 onClick={() => onClick(c.nombre)}
               >
                 {c.nombre}

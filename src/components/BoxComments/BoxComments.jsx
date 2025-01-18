@@ -20,7 +20,12 @@ const BoxComments = ({ productId }) => {
 
     try {
       const responseSubmit = await apiComentarios
-        .submitComment(token, parseInt(productId), comentario, new Date().getTime())
+        .submitComment(
+          token,
+          parseInt(productId),
+          comentario,
+          new Date().getTime()
+        )
         .then((res) => res);
       if (responseSubmit.ok) {
         setComentario("");
@@ -38,21 +43,18 @@ const BoxComments = ({ productId }) => {
   };
 
   return (
-    <section className="p-6 h-auto z-40">
-      <h1 className=" text-xl font-semibold mb-4">
-        {console.log(comments)
-        }
+    <section className="px-10 h-auto z-30 flex flex-col gap-6">
+      <h1 className="font-semibold">
+        {console.log(comments)}
         Comentarios ({comments.length})
       </h1>
-      <div className="w-full sm:h-auto sm:-z-10 sm:overflow-hidden m-0 p-0 pb-4 h-60 flex flex-col gap-4 overflow-y-scroll scroll-smooth mb-2">
+      <div className="flex flex-col gap-6">
         {comments.length > 0 && comments ? (
           comments.map((comment, index) => (
-            <aside
-              key={index}
-              className="grid grid-cols-[1fr_3fr] bg-slate-50 p-4 rounded-lg"
-            >
-              <section className="flex items-center justify-center h-full w-full">
-                <div className="rounded-full w-16 h-16 bg-slate-200 justify-self-end overflow-hidden cursor-pointer">
+            <aside key={index} className="flex flex-col gap-1 bg-neutral-content sm:bg-opacity-5 bg-opacity-20 p-4 rounded-md">
+              {/* AVATAR Y NOMBRE Y FECHA */}
+              <section className="flex gap-4 items-center h-full w-full">
+                <div className="rounded-full h-9 w-9 bg-slate-200 justify-self-end overflow-hidden cursor-pointer">
                   <img
                     src={
                       comment.avatar
@@ -62,30 +64,29 @@ const BoxComments = ({ productId }) => {
                     className="h-full w-full object-cover rounded-full"
                   />
                 </div>
+                <div className="flex flex-col">
+                  <h3 className="text-accent">{comment.nombre}</h3>
+                  <small className="text-xs opacity-50 font-semibold">
+                    {(() => {
+                      const fecha = new Date(comment.fecha);
+                      return fecha.toLocaleDateString("es-ES", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      });
+                    })()}
+                  </small>
+                </div>
               </section>
-              <section className=" flex flex-col">
-                <h3 className=" text-xl font-medium text-myGreen mb-2">
-                  {comment.nombre}
-                </h3>
-                <p>{comment.contenido}</p>
-                <small className="text-slate-400 self-end">
-                  {(() => {
-                    const fecha = new Date(comment.fecha);
-                    return fecha.toLocaleDateString("es-ES", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric"
-                    });
-                  })()}
-                </small>
-              </section>
+              {/* CONTENIDO */}
+              <p className=" bg-opacity-5 p-2 w-max">{comment.contenido}</p>
             </aside>
           ))
         ) : (
           <h3>Sin comentarios</h3>
         )}
       </div>
-      <aside className="flex w-full justify-between gap-1">
+      <aside className="flex w-full sm:w-1/2 gap-4 sm:pb-10">
         <div className="w-9/12">
           <Input
             type="text"

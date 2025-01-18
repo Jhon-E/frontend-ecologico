@@ -11,7 +11,6 @@ import ListOfCategories from "../../../components/ListOfCategories";
 import Loading from "../../../components/Loading";
 
 // Iconos e imágenes
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import IconUser from "../../../assets/iconUser.png";
 
 // Estilos
@@ -22,7 +21,7 @@ function Home() {
   const [products, setProducts] = useState(null);
   const [filterProducts, setFilterProducts] = useState(null);
   const [search, setSearch] = useState("");
-  const [cat, setCat] = useState("")
+  const [cat, setCat] = useState("");
 
   // Fetch de productos
   useEffect(() => {
@@ -38,10 +37,8 @@ function Home() {
 
   // Filtrado por categoría
   const handleCategoryClick = (categoryName) => {
-    setCat(categoryName)
-    const filtered = products.filter(
-      (p) => p.Nombre_cat === categoryName
-    );
+    setCat(categoryName);
+    const filtered = products.filter((p) => p.Nombre_cat === categoryName);
     setFilterProducts(filtered || null);
   };
 
@@ -61,77 +58,32 @@ function Home() {
   }, [search, products]);
 
   return products ? (
-    <main className="h-dvh w-full">
-      <Header avatar={user?.avatar || IconUser} user={user} />
-      {/* Sección Buscador */ }
-      <section className="sm:p-32 search-home sm:h-screen sm:justify-center sm:gap-24 sm:max-w flex flex-col gap-6 p-6">
-        <article className="sm:text-white rounded-md">
+    <main className="h-dvh w-full max-w-full">
+      <Header search={search} setSearch={setSearch} />
+      {/* Sección Buscador */}
+      <section className="sm:p-32 search-home sm:h-auto sm:justify-center sm:gap-24 sm:max-w flex flex-col gap-6 p-6">
+        <article className="sm:text-base-100 sm:top-0 rounded-md mt-20">
           <p className="font-bold">
             Hola <code>{user.nombre || "usuario"}</code>
           </p>
           <h1 className="font-bold text-2xl">¿Qué buscas para hoy?</h1>
         </article>
-        <Input
-          type="text"
-          placeholder="Buscar"
-          icon={faSearch}
-          value={search}
-          setValue={setSearch}
-        />
       </section>
-
       {/* Sección Productos */}
-      <section className="sm:px-32 sm:rounded-none p-6 bg-slate-100 w-full rounded-t-[40px]">
-        {/* Categorías */}
-        <div className="flex flex-col">
-          <h3 className="font-bold text-xl text-myGreen sm:self-center sm:text-3xl sm:mb-6">
-            Categorías
-          </h3>
-          <aside className="w-full">
-            <ListOfCategories onClick={handleCategoryClick} />
-          </aside>
-        </div>
-
-        {/* Producto Ejemplo */}
-        <div className="sm:p-0 bg-slate-200 flex justify-between items-evenly rounded-xl sm:h-72 sm:min-h-min mt-4 mb-4">
-          <div className="flex flex-col justify-between w-1/2 sm:w-full sm:p-12 p-2">
-            {products?.[0] ? (
-              <>
-                <p className="font-bold text-2xl">{products[0].nombre}</p>
-                <b className="text-myGreen text-3xl">{products[0].precio} $</b>
-                <Link
-                  to={`product/${products[0].ID_producto}`}
-                  className="text-myGreen font-bold text-lg mt-7 sm:mt-0 hover:bg-myGreen hover:text-white sm:max-w-min sm:p-2 sm:rounded-xl transition-all"
-                >
-                  Comprar
-                </Link>
-              </>
-            ) : (
-              <p>Sin productos a mostrar.</p>
-            )}
-          </div>
-          <div className="w-1/2 flex justify-end overflow-hidden">
-            {products?.[0]?.imagen ? (
-              <img
-                src={products[0].imagen}
-                alt={products[0].nombre}
-                className="object-cover h-full rounded-tr-xl rounded-br-xl hover:scale-125 transition-all self-end"
-              />
-            ) : (
-              <p className=" self-center">Sin imagen disponible.</p>
-            )}
-          </div>
-        </div>
-
-        {/* Productos Destacados */}
-        <aside className="dest-pro-cont w-full flex justify-between">
-          <p className="sm:text-3xl sm:text-myGreen sm:m-8 font-bold text-lg">
-            Productos en {cat? cat: "Destacados"}
-          </p>
-        </aside>
+      <section className="sm:px-32 sm:rounded-none w-full rounded-t-[40px] pb-6">
         {/* Lista Productos  */}
-        <div className="sm:overflow-x-hidden sm:flex-wrap sm:gap-14 flex mt-3 items-center">
-          <div className="grid grid-cols-2 w-full gap-2 sm:grid sm:grid-cols-4 sm:gap-3 sm:min-h-full">
+        <div className="sm:overflow-x-hidden sm:gap-14 sm:flex-row flex flex-col mt-3 items-center max-w-full">
+          {/* Categorías */}
+          <div className="flex flex-col">
+            <h3 className="font-bold text-xl text-accent sm:self-center sm:text-3xl sm:mb-6 sm:ml-0 ml-6">
+              Categorías
+            </h3>
+            <aside className="w-full overflow-x-hidden">
+              <ListOfCategories onClick={handleCategoryClick} />
+            </aside>
+          </div>
+          {/* PRODUCTOS */}
+          <div className="flex flex-col w-full gap-2 sm:grid sm:grid-cols-3 sm:gap-3 sm:min-h-full p-6">
             {filterProducts?.length ? (
               filterProducts.map((product) => (
                 <Card
@@ -147,6 +99,32 @@ function Home() {
                 Aún no hay productos con estas características🪴
               </span>
             )}
+          </div>
+        </div>
+        {/* Producto Ejemplo */}
+
+        <div className="card card-side bg-base-100 shadow-xl min-h-96 sm:p-0 p-6">
+          <figure>
+            {products?.[0]?.imagen ? (
+              <img
+                src={products[0].imagen}
+                alt={products[0].nombre}
+                className="object-cover h-full rounded-tr-xl rounded-br-xl hover:scale-125 transition-all self-end"
+              />
+            ) : (
+              <p className=" self-center">Sin imagen disponible.</p>
+            )}
+          </figure>
+          <div className="card-body flex justify-between">
+            <h2 className="card-title text-5xl font-bold">
+              {products[0].nombre}
+            </h2>
+            <h4 className=" text-4xl font-bold text-success self-start">
+              {products[0].precio}
+            </h4>
+            <div className="card-actions self-end">
+              <button className="btn btn-accent">Comprar</button>
+            </div>
           </div>
         </div>
       </section>

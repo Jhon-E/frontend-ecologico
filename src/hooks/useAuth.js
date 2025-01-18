@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/auth";
 import auth from "../services/ApiAuth";
 const defaultAvatar =
@@ -7,7 +7,10 @@ const defaultAvatar =
 export default function useAuth() {
   const { token, setToken, user, setUser } = useContext(AuthContext);
 
+  const [loading, setLoading] = useState(false);
+
   const signin = async (nombre, email, password, avatar) => {
+    setLoading(true);
     try {
       const response = await auth
         .signInService({
@@ -18,7 +21,8 @@ export default function useAuth() {
         })
         .then((res) => res);
       if (response.status === 409) {
-        const res = await response.json()
+        const res = await response.json();
+        setLoading(false);
         alert(res.message);
       } else {
         const res = await response.json();
@@ -40,6 +44,7 @@ export default function useAuth() {
           avatar: avatar || defaultAvatar,
           rol: 1,
         });
+        setLoading(false);
       }
     } catch (err) {
       console.error(err);
@@ -47,15 +52,16 @@ export default function useAuth() {
   };
 
   const login = async (email, password) => {
+    setLoading(true);
     try {
       const response = await auth
         .loginService({ email, password })
         .then((res) => res);
 
       if (response.status === 409) {
-        const res = await response.json()
-        
-        alert(res.message);
+        const res = await response.json();
+        setLoading(false);
+        return res.message;
       } else {
         const res = await response.json();
         console.log(res);
@@ -76,6 +82,7 @@ export default function useAuth() {
           avatar: res.user.avatar || defaultAvatar,
           rol: res.user.rol,
         });
+        setLoading(false);
         window.location.replace("http://localhost:5173/mainsystem/home");
       }
     } catch (err) {
@@ -92,6 +99,7 @@ export default function useAuth() {
   };
 
   return {
+    loading,
     login,
     logout,
     signin,

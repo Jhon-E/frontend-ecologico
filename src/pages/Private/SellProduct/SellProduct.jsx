@@ -64,17 +64,17 @@ function SellProduct() {
       user.nombre,
       user.email
     );
-    setBlockBtn(false)
+    setBlockBtn(false);
   };
 
   return (
     <>
       <Header />
-      <main className="sm:mt-24 sm:p-10 sm:flex sm:flex-col sm:items-center">
-        <h1 className="font-bold text-3xl text-myGreen ml-4">
+      <main className="sm:mt-28 mt-16 sm:mx-32 p-10 sm:rounded-lg sm:bg-neutral flex flex-col items-center gap-6 sm:h-auto h-dvh">
+        <h1 className="font-bold text-3xl text-neutral sm:text-neutral-content ml-4 self-start">
           Vender mi producto
         </h1>
-        <form className=" flex flex-col gap-4 w-full p-6 sm:grid sm:grid-cols-3 sm:grid-rows-3">
+        <form className=" flex flex-col gap-4 sm:p-6 sm:w-1/2 text-neutral sm:text-neutral-content sm:h-auto h-full justify-around">
           <Input
             type="text"
             placeholder="Ingrese el nombre de su producto"
@@ -89,40 +89,24 @@ function SellProduct() {
             value={description}
             setValue={setDescription}
           />
-          <div className="flex flex-row gap-1 bg-white/80 rounded-md items-center p-2 text-black border-gray-500 border-[1px]">
-            {faImage ? (
-              <FontAwesomeIcon
-                icon={faImage}
-                height={26}
-                width={24}
-                color="gray"
-              />
-            ) : (
-              ""
-            )}
-            <input
-              accept="image/"
-              className="w-full ml-1 py-2 bg-transparent outline-none"
-              type="file"
-              ref={fileElem}
+          <div className="flex sm:flex-row flex-col w-full gap-2">
+            <Input
+              type="number"
+              placeholder="Precio de venta"
+              icon={faMoneyBill}
+              value={precio}
+              setValue={setPrecio}
+            />
+            <Input
+              type="number"
+              placeholder="Disponibles"
+              value={stock}
+              setValue={setStock}
             />
           </div>
-          <Input
-            type="number"
-            placeholder="Precio de venta"
-            icon={faMoneyBill}
-            value={precio}
-            setValue={setPrecio}
-          />
-          <Input
-            type="number"
-            placeholder="Cantidades disponibles"
-            icon={faMoneyBill}
-            value={stock}
-            setValue={setStock}
-          />
           <select
             name="listaCategorias"
+            className="select select-accent w-full"
             onChange={(e) => setCategoria(e.target.value)}
           >
             {categorias
@@ -135,10 +119,14 @@ function SellProduct() {
                 })
               : "cargando..."}
           </select>
-        </form>
-        <div className=" sm:w-1/3">
+          <input
+            accept="image/"
+            className="file-input file-input-bordered file-input-accent w-full"
+            type="file"
+            ref={fileElem}
+          />
           <Btn value="Publicar" isDisable={blockBtn} onClick={handleClick} />
-        </div>
+        </form>
       </main>
     </>
   );

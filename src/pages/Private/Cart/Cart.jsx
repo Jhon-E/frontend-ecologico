@@ -16,37 +16,50 @@ function CartItem({
   stock,
 }) {
   return (
-    <li className="w-full flex flex-col items-start gap-8 p-6 sm:w-2/5 sm:h-96">
-      <img className="w-2/3 h-1/3 self-center object-contain" src={imagen} alt={nombre} />
-      <div className="flex flex-col justify-start">
-        <strong>
-          {nombre} - ${precio * quantity}
-        </strong>
-        <p className="text-myGreen">Unidades disponbles {stock}</p>
+    <div className="card bg-base-100 w-96 shadow-xl">
+      <figure>
+        <img src={imagen} alt={nombre} />
+      </figure>
+      <div className="card-body">
+        <h2 className="card-title">
+          {nombre}
+          <div className="badge badge-secondary">${precio * quantity}</div>
+        </h2>
+        <div className="card-actions justify-end">
+          <div className="badge badge-outline">Unidades disponbles {stock}</div>
+        </div>
+        <div className="card-actions justify-center">
+          <div className="flex w-full items-center">
+            <small className=" text-lg font-bold w-1/2">
+              Cantidad &nbsp;
+              <span className=" font-bold text-accent">{quantity}</span>
+            </small>
+            {quantity < stock ? (
+              <div className=" flex gap-4 w-5/6">
+                <button className="btn btn-accent w-1/2" onClick={addToCart}>
+                  +
+                </button>
+                <button
+                  className="btn btn-accent w-1/2"
+                  onClick={removeFromCart}
+                >
+                  -
+                </button>
+              </div>
+            ) : (
+              <div className="flex w-5/6">
+                <button
+                  className="btn btn-error w-full"
+                  onClick={removeFromCart}
+                >
+                  -
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
-
-      <footer className="flex justify-around items-center w-full bg-slate-200 p-2 rounded-lg">
-        <small className=" text-lg">
-          Cantidad: <span className=" font-bold text-myGreen">{quantity}</span>
-        </small>
-        {quantity < stock ? (
-          <>
-            <div>
-              <Btn onClick={addToCart} value={"+"} />
-            </div>
-            <div>
-              <Btn onClick={removeFromCart} value={"-"} />
-            </div>
-          </>
-        ) : (
-          <>
-            <div>
-              <Btn onClick={removeFromCart} value={"-"} />
-            </div>
-          </>
-        )}
-      </footer>
-    </li>
+    </div>
   );
 }
 
@@ -56,7 +69,7 @@ export default function Cart() {
   const navigate = useNavigate();
 
   const handleClick = (cart) => {
-    const pedido = [...cart, {token}];
+    const pedido = [...cart, { token }];
 
     orderApi.submitOrder(pedido).then((res) => {
       if (res.status === 201) {
@@ -67,15 +80,13 @@ export default function Cart() {
     });
   };
   return (
-    <main className="flex flex-col min-h-screen">
+    <main className="flex flex-col min-h-dvh p-32">
       <Header />
-      <ul
-        className={`flex justify-center items-center sm:flex-row sm:justify-around sm:flex-wrap sm:mt-16 ${
-          cart.length === 0 ? "flex-1" : "flex-col gap-y-4"
-        }`}
-      >
+      <section className="flex flex-wrap gap-6 justify-center">
         {cart.length === 0 ? (
-          <li className="h-full">No has agregado items en el carrito</li>
+          <div className="absolute top-0 left-0 w-full h-dvh flex justify-center items-center">
+            <h1 className="font-bold text-5xl">El carrito está vacío.</h1>
+          </div>
         ) : (
           cart.map((product) => (
             <CartItem
@@ -86,8 +97,8 @@ export default function Cart() {
             />
           ))
         )}
-      </ul>
-      <footer className="flex p-6 gap-x-2">
+      </section>
+      <footer className="fixed bg-neutral bg-opacity-65 backdrop-filter backdrop-blur-lg w-max bottom-5 p-5 rounded-lg flex gap-4 left-1/2 -translate-x-1/2">
         <Btn value="Limpiar Carrito" onClick={clearCart} />
         <Btn
           value="Realizar Compra"

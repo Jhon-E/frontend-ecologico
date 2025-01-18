@@ -30,7 +30,7 @@ export default function SignUpForm() {
       fileElem.current.files.length > 0
     ) {
       //aca cargo la imagen a cloudinary
-      setBlockBtn(true)
+      setBlockBtn(true);
       let avatar = fileElem.current.files[0];
 
       const data = new FormData();
@@ -52,7 +52,7 @@ export default function SignUpForm() {
       setEmail("");
       setName("");
       setPassword("");
-      setBlockBtn(false)
+      setBlockBtn(false);
       navigate(PRIVATE_ROUTES.PRIVATE, { replace: true });
     } else {
       alert("Por favor rellene los campos");
@@ -82,19 +82,12 @@ export default function SignUpForm() {
         value={password}
         setValue={setPassword}
       />
-      <div className="flex flex-row gap-1 bg-white/80 rounded-md items-center p-2 text-black border-gray-500 border-[1px]">
-        {faImage ? (
-          <FontAwesomeIcon icon={faImage} height={26} width={24} color="gray" />
-        ) : (
-          ""
-        )}
-        <input
-          accept="image/"
-          className="w-full ml-1 py-2 bg-transparent outline-none"
-          type="file"
-          ref={fileElem}
-        />
-      </div>
+      <input
+        accept="image/"
+        className="file-input text-neutral file-input-accent w-full"
+        type="file"
+        ref={fileElem}
+      />
       <Btn
         isDisable={blockBtn}
         value="Registrarse"
